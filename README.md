@@ -1,7 +1,7 @@
 # agr-sdk-example-android
 AGR.uz sdk for android
 
-## What it is
+## What is it
 
 
 ## How to use
