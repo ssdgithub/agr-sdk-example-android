@@ -5,7 +5,7 @@ AGR.uz sdk for android
 
 
 ## How to use
-**Your project's minimum deployment target should be Android 3.0 (API level 11) or later.**
+**Your project's minimum deployment target should be Android 4.0 (API level 14) or later.**
 
 * Add `agrsdk.aar` library to `.../app/libs` folder
 * Add the code below to module-level 'build.gradle' file
