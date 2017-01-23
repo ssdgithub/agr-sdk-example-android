@@ -28,6 +28,7 @@ allprojects {
 To setup your project you should implement `IAGRBillingHandler` interface and than call `new AGRBilling().preparePayment(IAGRBillingHandler mListener, int vendorID, String accountID, int amount)` where:
 * mListener - delegate class for IAGRBillingHandler
 * vendorID - your vendor ID from AGR.uz
+* vendorSecretKey - your vendor secret key from AGR.uz
 * accountID - account indetifier in your service
 * amount - amount to pay (optional)
 
@@ -39,8 +40,8 @@ public class MainActivity extends AppCompatActivity implements IAGRBillingHandle
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 				
-				//new AGRBilling().preparePayment(this, 5, "member@gmail.com");
-        new AGRBilling().preparePayment(this, 5, "member@gmail.com", 5000);
+				//new AGRBilling().preparePayment(this, 5, "7@KXkAYC8-jfJB6VVBFY!kvM?", "member@gmail.com");
+        new AGRBilling().preparePayment(this, 5, "7@KXkAYC8-jfJB6VVBFY!kvM?", "member@gmail.com", 5000);
     }
 
    	@Override
