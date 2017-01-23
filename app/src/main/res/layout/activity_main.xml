@@ -20,6 +20,12 @@
         android:inputType="number" />
 
     <EditText
+        android:id="@+id/vendorSecretKeyText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="vendor secret key" />
+
+    <EditText
         android:id="@+id/accountIDtext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

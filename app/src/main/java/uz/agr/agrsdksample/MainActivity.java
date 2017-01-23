@@ -1,8 +1,8 @@
 package uz.agr.agrsdksample;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity implements IAGRBillingHandle
 
         final EditText vendorIDtext = (EditText) findViewById(R.id.vendorIDtext);
 
+        final EditText vendorSecretkey = (EditText) findViewById(R.id.vendorSecretKeyText);
+
         final EditText accountIDtext = (EditText) findViewById(R.id.accountIDtext);
 
         final EditText amountText = (EditText) findViewById(R.id.amountText);
@@ -30,27 +32,31 @@ public class MainActivity extends AppCompatActivity implements IAGRBillingHandle
             public void onClick(View v) {
                 if (vendorIDtext.getText().toString().equals(""))
                     Toast.makeText(MainActivity.this, "Enter vendor ID", Toast.LENGTH_SHORT).show();
+                else if (vendorSecretkey.getText().toString().equals(""))
+                    Toast.makeText(MainActivity.this, "Enter vendor secret key", Toast.LENGTH_SHORT).show();
                 else if (accountIDtext.getText().toString().equals(""))
                     Toast.makeText(MainActivity.this, "Enter account ID", Toast.LENGTH_SHORT).show();
                 else {
-                    makePay(Integer.parseInt(vendorIDtext.getText().toString()), accountIDtext.getText().toString(), amountText.getText().toString());
+                    makePay(Integer.parseInt(vendorIDtext.getText().toString()), vendorSecretkey.getText().toString(), accountIDtext.getText().toString(), amountText.getText().toString());
                 }
             }
         });
 
     }
 
-    private void makePay(int vendorID, String accountID, String amount) {
+    private void makePay(int vendorID, String vendorSecretKey, String accountID, String amount) {
         AGRBilling agr = new AGRBilling();
 
         if (amount.equals("")) {
             agr.preparePayment(this,
                     vendorID,
+                    vendorSecretKey,
                     accountID);
         } else {
             agr.preparePayment(this,
                     vendorID,
                     accountID,
+                    vendorSecretKey,
                     Integer.parseInt(amount));
         }
     }
