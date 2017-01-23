@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity implements IAGRBillingHandle
         } else {
             agr.preparePayment(this,
                     vendorID,
-                    accountID,
                     vendorSecretKey,
+                    accountID,
                     Integer.parseInt(amount));
         }
     }
