@@ -31,6 +31,7 @@ To setup your project you should implement `IAGRBillingHandler` interface and th
 * vendorSecretKey - your vendor secret key from AGR.uz
 * accountID - account indetifier in your service
 * amount - amount to pay (optional)
+* transData - vendor additional data (optional)
 
 ```java
 public class MainActivity extends AppCompatActivity implements IAGRBillingHandler {
