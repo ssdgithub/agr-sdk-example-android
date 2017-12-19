@@ -5,8 +5,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import uz.agr.agrsdk.AGRBilling;
 import uz.agr.agrsdk.interfaces.IAGRBillingHandler;
@@ -26,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements IAGRBillingHandle
 
         final EditText amountText = (EditText) findViewById(R.id.amountText);
 
+        final CheckBox transDataCheck = (CheckBox) findViewById(R.id.transDataCheck);
+
         Button doneBtn = (Button) findViewById(R.id.doneBtn);
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,27 +43,56 @@ public class MainActivity extends AppCompatActivity implements IAGRBillingHandle
                 else if (accountIDtext.getText().toString().equals(""))
                     Toast.makeText(MainActivity.this, "Enter account ID", Toast.LENGTH_SHORT).show();
                 else {
-                    makePay(Integer.parseInt(vendorIDtext.getText().toString()), vendorSecretkey.getText().toString(), accountIDtext.getText().toString(), amountText.getText().toString());
+                    makePay(Integer.parseInt(vendorIDtext.getText().toString()), vendorSecretkey.getText().toString(), accountIDtext.getText().toString(), amountText.getText().toString(), transDataCheck.isChecked());
                 }
             }
         });
 
     }
 
-    private void makePay(int vendorID, String vendorSecretKey, String accountID, String amount) {
+    private void makePay(int vendorID, String vendorSecretKey, String accountID, String amount, Boolean sendTransData) {
         AGRBilling agr = new AGRBilling();
 
+        JSONObject jsonObject = new JSONObject();
+
+        if(sendTransData)
+        {
+            try {
+                jsonObject.put("testField", "testValue");
+            } catch (JSONException e) {
+                e.printStackTrace();
+                jsonObject = null;
+            }
+        }
+
         if (amount.equals("")) {
-            agr.preparePayment(this,
-                    vendorID,
-                    vendorSecretKey,
-                    accountID);
+            if(!sendTransData) {
+                agr.preparePayment(this,
+                        vendorID,
+                        vendorSecretKey,
+                        accountID);
+            } else {
+                agr.preparePayment(this,
+                        vendorID,
+                        vendorSecretKey,
+                        accountID,
+                        jsonObject);
+            }
         } else {
-            agr.preparePayment(this,
-                    vendorID,
-                    vendorSecretKey,
-                    accountID,
-                    Integer.parseInt(amount));
+            if(!sendTransData) {
+                agr.preparePayment(this,
+                        vendorID,
+                        vendorSecretKey,
+                        accountID,
+                        Integer.parseInt(amount));
+            } else {
+                agr.preparePayment(this,
+                        vendorID,
+                        vendorSecretKey,
+                        accountID,
+                        Integer.parseInt(amount),
+                        jsonObject);
+            }
         }
     }
 

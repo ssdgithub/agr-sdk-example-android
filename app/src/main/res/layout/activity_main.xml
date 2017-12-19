@@ -29,14 +29,19 @@
         android:id="@+id/accountIDtext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="account id"
-        android:inputType="number" />
+        android:hint="account id" />
 
     <EditText
         android:id="@+id/amountText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="amount (optional)" />
+
+    <CheckBox
+        android:id="@+id/transDataCheck"
+        android:text="Send test JSON data (transData)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/doneBtn"
